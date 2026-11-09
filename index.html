@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!--
+    NO-FLASH THEME SCRIPT
+    Must run synchronously before any CSS is parsed or painted.
+    Reads localStorage and sets data-theme on <html> immediately.
+    Wrapped in try/catch so a blocked localStorage never breaks the page.
+  -->
+  <script>
+    try {
+      var _t = localStorage.getItem('theme');
+      if (_t === 'dark' || _t === 'light') {
+        document.documentElement.setAttribute('data-theme', _t);
+      }
+    } catch (e) {}
+  </script>
+
+  <!-- Primary meta -->
+  <title>Prajwal Hegde | CA Intermediate &amp; Article Trainee</title>
+  <meta name="description" content="Prajwal Hegde — CA Intermediate (both groups cleared), Article Trainee at S N Dhawan &amp; Co LLP (Forvis Mazars), Bengaluru. Seeking a 12-month CA Industrial Training in Controllership, R2R, Corporate Accounting or FP&A." />
+
+  <!-- Open Graph / sharing -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Prajwal Hegde | CA Intermediate &amp; Article Trainee" />
+  <meta property="og:description" content="CA Intermediate (both groups cleared), Article Trainee at S N Dhawan &amp; Co LLP (Forvis Mazars). Seeking CA Industrial Training in Controllership / R2R / Corporate Accounting / FP&amp;A." />
+  <meta property="og:image"       content="assets/Prajwal_Hegde_Profile_Photo.jpg" />
+  <!-- Update og:url with your GitHub Pages URL before publishing -->
+  <meta property="og:url"         content="https://prajwalhegde.github.io/" />
+
+  <!-- Favicon: "PH" monogram SVG -->
+  <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+
+  <!-- Google Fonts: Inter + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="styles.css" />
+</head>
+
+<body>
+
+<!-- =================================================================
+     SHARED HEADER — copy this block identically to every new page.
+     On the active page: add  aria-current="page"  to the matching
+     <a> in BOTH .nav-links and #nav-mobile-menu.
+     ================================================================= -->
+<header class="site-header">
+  <div class="container">
+    <nav class="nav-inner" aria-label="Main navigation">
+
+      <!-- Logo -->
+      <a href="index.html" class="nav-logo" aria-label="Prajwal Hegde — Home">
+        <span class="nav-logo-bracket">[</span>PH<span class="nav-logo-bracket">]</span>
+      </a>
+
+      <!-- Desktop links -->
+      <ul class="nav-links" role="list">
+        <li><a href="index.html"       aria-current="page">home</a></li>
+        <li><a href="experience.html"               >experience</a></li>
+        <li><a href="contact.html"                  >contact</a></li>
+      </ul>
+
+      <!-- Theme toggle + hamburger -->
+      <div class="nav-controls">
+
+        <button class="theme-toggle" type="button" aria-label="Switch to dark theme">
+          <!-- Moon icon: visible in light mode -->
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true" focusable="false">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+          </svg>
+          <!-- Sun icon: visible in dark mode -->
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round"
+               aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="4"/>
+            <line x1="12" y1="2"     x2="12" y2="6"    />
+            <line x1="12" y1="18"    x2="12" y2="22"   />
+            <line x1="4.93" y1="4.93"  x2="7.76" y2="7.76" />
+            <line x1="16.24" y1="16.24" x2="19.07" y2="19.07"/>
+            <line x1="2"  y1="12"    x2="6"  y2="12"   />
+            <line x1="18" y1="12"    x2="22" y2="12"   />
+            <line x1="4.93" y1="19.07" x2="7.76" y2="16.24"/>
+            <line x1="16.24" y1="7.76"  x2="19.07" y2="4.93"/>
+          </svg>
+        </button>
+
+        <button
+          class="nav-toggle"
+          type="button"
+          aria-label="Open navigation menu"
+          aria-expanded="false"
+          aria-controls="nav-mobile-menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+      </div><!-- /nav-controls -->
+    </nav>
+  </div>
+</header>
+
+<!-- Mobile slide-in menu (outside .container so it spans full width) -->
+<nav id="nav-mobile-menu" class="nav-mobile-menu" aria-label="Mobile navigation">
+  <a href="index.html"       aria-current="page">home</a>
+  <a href="experience.html"               >experience</a>
+  <a href="contact.html"                  >contact</a>
+</nav>
+<!-- ================================================================= END SHARED HEADER -->
+
+
+<main id="main-content">
+
+  <!-- ============================================================
+       HERO
+       ============================================================ -->
+  <section class="hero" aria-label="Introduction">
+    <div class="container">
+      <div class="hero-content">
+
+        <p class="hero-eyebrow">// hello, I'm</p>
+
+        <h1 class="hero-name">Prajwal Hegde</h1>
+
+        <p class="hero-tagline">
+          <span class="prompt" aria-hidden="true">//&nbsp;</span>CA
+          Intermediate&nbsp;|&nbsp;Article Trainee, Statutory
+          Audit&nbsp;|&nbsp;Bengaluru
+        </p>
+
+        <div class="hero-actions">
+          <a href="experience.html" class="btn btn-primary">
+            View Experience
+            <!-- Arrow-right icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 width="16" height="16" aria-hidden="true" focusable="false">
+              <line x1="5" y1="12" x2="19" y2="12"/>
+              <polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+
+          <a href="assets/Prajwal_Hegde_Resume.pdf"
+             class="btn btn-secondary"
+             download
+             aria-label="Download Prajwal Hegde's resume as a PDF">
+            Download Resume
+            <!-- Download icon -->
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                 width="16" height="16" aria-hidden="true" focusable="false">
+              <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+              <polyline points="7 10 12 15 17 10"/>
+              <line x1="12" y1="15" x2="12" y2="3"/>
+            </svg>
+          </a>
+        </div><!-- /hero-actions -->
+
+      </div><!-- /hero-content -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       AVAILABILITY STRIP
+       ============================================================ -->
+  <div class="availability-strip" role="note" aria-label="Availability for CA Industrial Training">
+    <div class="container">
+      <div class="strip-inner">
+        <span class="availability-dot" aria-hidden="true"></span>
+        Available for CA Industrial Training&ensp;&mdash;&ensp;Articleship ends Jan&nbsp;2028
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ============================================================
+       ABOUT
+       ============================================================ -->
+  <section class="section section-about" id="about" aria-labelledby="about-heading">
+    <div class="container">
+
+      <span class="section-label" aria-hidden="true">// about</span>
+
+      <div class="about-grid">
+
+        <!-- Photo / placeholder -->
+        <div class="avatar-wrap reveal">
+          <!--
+            The .avatar container shows "PH" initials by default.
+            When photo.jpg loads, the <img> sits on top (z-index: 2)
+            and covers the initials automatically — no JS required.
+            onerror hides any broken-image icon if the file is absent.
+          -->
+          <div class="avatar" role="img" aria-label="Profile photo of Prajwal Hegde">
+            <span class="avatar-initials" aria-hidden="true">PH</span>
+            <img
+              src="assets/Prajwal_Hegde_Profile_Photo.jpg"
+              alt="Prajwal Hegde"
+              onerror="this.style.display='none'"
+            />
+          </div>
+        </div>
+
+        <!-- Text column -->
+        <div class="about-text">
+
+          <h2 id="about-heading" class="section-title reveal">About Prajwal</h2>
+
+          <p class="reveal reveal-d1">
+            Prajwal is a CA Intermediate — both groups cleared — currently completing his
+            articleship at <strong>S&nbsp;N Dhawan &amp; Co&nbsp;LLP (Forvis Mazars)</strong>,
+            Bengaluru. His day-to-day work in statutory audit spans audit documentation,
+            financial record review, and engagement workflow support across varied client sectors.
+          </p>
+
+          <p class="reveal reveal-d2">
+            These engagements have built a working foundation in financial reporting frameworks,
+            internal controls, and the record-to-report cycle — the same competencies that
+            underpin Controllership, Corporate Accounting, and FP&amp;A roles in industry.
+          </p>
+
+          <p class="reveal reveal-d3">
+            He is actively seeking a <strong>12-month CA Industrial Training</strong> placement
+            in Controllership, Record to Report, Corporate Accounting, or FP&amp;A, where he
+            can apply and deepen this foundation in a structured corporate environment.
+          </p>
+
+          <div class="about-tags reveal reveal-d4" aria-label="Qualifications">
+            <span class="tag">CA Intermediate — Both Groups Cleared</span>
+            <span class="tag">ICITSS Completed</span>
+            <span class="tag">Article Trainee</span>
+            <span class="tag">Statutory Audit</span>
+          </div>
+
+        </div><!-- /about-text -->
+
+      </div><!-- /about-grid -->
+    </div>
+  </section>
+
+
+  <!-- ============================================================
+       CORE COMPETENCIES
+       ============================================================ -->
+  <section class="section section-competencies" id="competencies" aria-labelledby="comp-heading">
+    <div class="container">
+
+      <span class="section-label" aria-hidden="true">// competencies</span>
+      <h2 id="comp-heading" class="section-title reveal">Core Competencies</h2>
+
+      <div class="comp-grid">
+
+        <div class="comp-card reveal reveal-d1">
+          <span class="comp-label">// audit</span>
+          <strong class="comp-name">Statutory Audit</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d2">
+          <span class="comp-label">// reporting</span>
+          <strong class="comp-name">Financial Reporting</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d3">
+          <span class="comp-label">// controls</span>
+          <strong class="comp-name">Internal Controls</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d4">
+          <span class="comp-label">// r2r</span>
+          <strong class="comp-name">R2R Concepts</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d5">
+          <span class="comp-label">// excel</span>
+          <strong class="comp-name">MS Excel</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d6">
+          <span class="comp-label">// accounting</span>
+          <strong class="comp-name">Tally Prime</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d7">
+          <span class="comp-label">// indirect-tax</span>
+          <strong class="comp-name">GST</strong>
+        </div>
+
+        <div class="comp-card reveal reveal-d8">
+          <span class="comp-label">// direct-tax</span>
+          <strong class="comp-name">Direct Tax Concepts</strong>
+        </div>
+
+      </div><!-- /comp-grid -->
+    </div>
+  </section>
+
+</main>
+
+
+<!-- =================================================================
+     SHARED FOOTER — copy this block identically to every new page.
+     ================================================================= -->
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-inner">
+
+      <p class="footer-copy">&copy; 2026 Prajwal Hegde</p>
+
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a
+          href="https://www.linkedin.com/in/prajwal-hegde-work"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Prajwal Hegde on LinkedIn (opens in new tab)"
+        >LinkedIn</a>
+        <a
+          href="mailto:prajwalhegde.work@gmail.com"
+          aria-label="Send Prajwal an email"
+        >Email</a>
+      </nav>
+
+      <p class="footer-meta">Plain HTML. No frameworks.</p>
+
+    </div>
+  </div>
+</footer>
+<!-- ================================================================= END SHARED FOOTER -->
+
+
+<script src="script.js"></script>
+</body>
+</html>
