@@ -1,9 +1,8 @@
 /* ============================================================
-   SCRIPT.JS — Prajwal Hegde Personal Profile
-   Handles: theme toggle, mobile nav, scroll-reveal
-   NOTE: The no-flash theme script lives inline in <head> of
-         each HTML file. This file wires everything up after
-         DOMContentLoaded.
+   SCRIPT.JS — Prajwal Hegde · Bento Portfolio
+   Handles: theme toggle, mobile nav, scroll-reveal,
+            typewriter, count-up.
+   NOTE: The no-flash theme script lives inline in <head>.
    ============================================================ */
 
 'use strict';
@@ -12,23 +11,23 @@
    THEME TOGGLE
    ---------------------------------------------------------- */
 function initTheme() {
-  const toggle = document.querySelector('.theme-toggle');
+  var toggle = document.querySelector('.theme-toggle');
   if (!toggle) return;
 
   function updateLabel() {
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+    var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
     toggle.setAttribute(
       'aria-label',
       isDark ? 'Switch to light theme' : 'Switch to dark theme'
     );
   }
 
-  updateLabel(); // Set correct label on page load
+  updateLabel();
 
-  toggle.addEventListener('click', () => {
-    const html  = document.documentElement;
-    const isDark = html.getAttribute('data-theme') === 'dark';
-    const next  = isDark ? 'light' : 'dark';
+  toggle.addEventListener('click', function () {
+    var html = document.documentElement;
+    var isDark = html.getAttribute('data-theme') === 'dark';
+    var next = isDark ? 'light' : 'dark';
 
     html.setAttribute('data-theme', next);
     updateLabel();
@@ -45,8 +44,8 @@ function initTheme() {
    MOBILE NAVIGATION
    ---------------------------------------------------------- */
 function initMobileNav() {
-  const hamburger = document.querySelector('.nav-toggle');
-  const mobileMenu = document.getElementById('nav-mobile-menu');
+  var hamburger = document.querySelector('.nav-toggle');
+  var mobileMenu = document.getElementById('nav-mobile-menu');
   if (!hamburger || !mobileMenu) return;
 
   function openMenu() {
@@ -55,8 +54,7 @@ function initMobileNav() {
     mobileMenu.classList.add('is-open');
     document.body.classList.add('menu-open');
 
-    // Move focus to first focusable item
-    const firstLink = mobileMenu.querySelector('a');
+    var firstLink = mobileMenu.querySelector('a');
     if (firstLink) firstLink.focus();
   }
 
@@ -68,20 +66,18 @@ function initMobileNav() {
     hamburger.focus();
   }
 
-  hamburger.addEventListener('click', () => {
-    const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+  hamburger.addEventListener('click', function () {
+    var isOpen = hamburger.getAttribute('aria-expanded') === 'true';
     isOpen ? closeMenu() : openMenu();
   });
 
-  // Close on Escape key
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && hamburger.getAttribute('aria-expanded') === 'true') {
       closeMenu();
     }
   });
 
-  // Close on tap outside menu/hamburger
-  document.addEventListener('click', (e) => {
+  document.addEventListener('click', function (e) {
     if (
       hamburger.getAttribute('aria-expanded') === 'true' &&
       !hamburger.contains(e.target) &&
@@ -91,13 +87,11 @@ function initMobileNav() {
     }
   });
 
-  // Close when a nav link is clicked
-  mobileMenu.querySelectorAll('a').forEach((link) => {
+  mobileMenu.querySelectorAll('a').forEach(function (link) {
     link.addEventListener('click', closeMenu);
   });
 
-  // Close if viewport grows to desktop width
-  window.addEventListener('resize', () => {
+  window.addEventListener('resize', function () {
     if (window.innerWidth >= 768 && hamburger.getAttribute('aria-expanded') === 'true') {
       closeMenu();
     }
@@ -106,49 +100,117 @@ function initMobileNav() {
 
 /* ----------------------------------------------------------
    SCROLL REVEAL
-   Uses IntersectionObserver; respects prefers-reduced-motion.
-   CSS sets the initial hidden state; this adds .is-visible.
    ---------------------------------------------------------- */
 function initScrollReveal() {
-  // If the user prefers reduced motion, the CSS already shows
-  // elements without animation — nothing else to do here.
-  const prefersReducedMotion = window.matchMedia(
-    '(prefers-reduced-motion: reduce)'
-  ).matches;
-  if (prefersReducedMotion) return;
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
-  const elements = document.querySelectorAll('.reveal');
+  var elements = document.querySelectorAll('.reveal');
   if (!elements.length) return;
 
-  // Fallback for older browsers
   if (!('IntersectionObserver' in window)) {
-    elements.forEach((el) => el.classList.add('is-visible'));
+    elements.forEach(function (el) { el.classList.add('is-visible'); });
     return;
   }
 
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target); // Animate only once
+          observer.unobserve(entry.target);
         }
       });
     },
-    {
-      threshold: 0.1,
-      rootMargin: '0px 0px -48px 0px',
-    }
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
   );
 
-  elements.forEach((el) => observer.observe(el));
+  elements.forEach(function (el) { observer.observe(el); });
+}
+
+/* ----------------------------------------------------------
+   TYPEWRITER
+   Types once, then shows a blinking cursor.
+   Falls back to static text under prefers-reduced-motion
+   or when JS is off (text is already in the HTML).
+   ---------------------------------------------------------- */
+function initTypewriter() {
+  var el = document.querySelector('.typewriter-text');
+  if (!el) return;
+
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  var fullText = el.textContent.trim();
+  el.textContent = '';
+
+  var i = 0;
+
+  function type() {
+    if (i < fullText.length) {
+      el.textContent += fullText.charAt(i);
+      i++;
+      setTimeout(type, 45 + Math.random() * 35);
+    }
+  }
+
+  /* Small delay so the card renders first */
+  setTimeout(type, 700);
+}
+
+/* ----------------------------------------------------------
+   COUNT-UP
+   Animates a number from 0 to data-target when visible.
+   Respects prefers-reduced-motion (shows final number).
+   ---------------------------------------------------------- */
+function initCountUp() {
+  var elements = document.querySelectorAll('.count-up');
+  if (!elements.length) return;
+
+  var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reducedMotion) return; /* HTML already shows the final number */
+
+  if (!('IntersectionObserver' in window)) return;
+
+  var observer = new IntersectionObserver(
+    function (entries) {
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+
+        var el = entry.target;
+        var target = parseInt(el.getAttribute('data-target'), 10);
+        var prefix = el.getAttribute('data-prefix') || '';
+        var suffix = el.getAttribute('data-suffix') || '';
+        var duration = 1200;
+        var startTime = performance.now();
+
+        function easeOutQuart(t) {
+          return 1 - Math.pow(1 - t, 4);
+        }
+
+        function update(now) {
+          var elapsed = now - startTime;
+          var progress = Math.min(elapsed / duration, 1);
+          var current = Math.round(easeOutQuart(progress) * target);
+          el.textContent = prefix + current.toLocaleString('en-IN') + suffix;
+          if (progress < 1) requestAnimationFrame(update);
+        }
+
+        requestAnimationFrame(update);
+        observer.unobserve(el);
+      });
+    },
+    { threshold: 0.5 }
+  );
+
+  elements.forEach(function (el) { observer.observe(el); });
 }
 
 /* ----------------------------------------------------------
    INIT
    ---------------------------------------------------------- */
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', function () {
   initTheme();
   initMobileNav();
   initScrollReveal();
+  initTypewriter();
+  initCountUp();
 });
